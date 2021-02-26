@@ -1,0 +1,80 @@
+@mixin bg-image($url, $ext: '.png'){
+  background-image: url($url+'@2x'+$ext);
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+    background-image: url($url+'@2x'+$ext);
+  }
+}
+
+@mixin border-bottom-1px($color:rgba(7,17,27,0.1)){
+  position: relative;
+  &::after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: "";
+    width: 100%;
+    border-bottom: 1px solid $color;
+    @media (min-resolution: 2dppx){
+      transform: scaleY(0.5);
+    }
+    @media (min-resolution: 3dppx){
+      transform: scaleY(0.333);
+    }
+  }
+}
+
+@mixin border-top-1px($color:rgba(7,17,27,0.1)){
+  position: relative;
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    width: 100%;
+    border-top: 1px solid $color;
+    @media (min-resolution: 2dppx){
+      transform: scaleY(0.5);
+    }
+    @media (min-resolution: 3dppx){
+      transform: scaleY(0.333);
+    }
+  }
+}
+
+@mixin border-right-1px($color:rgba(7,17,27,0.1)){
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: "";
+    height: 100%;
+    border-right: 1px solid $color;
+    @media (min-resolution: 2dppx){
+      transform: scaleX(0.5);
+    }
+    @media (min-resolution: 3dppx){
+      transform: scaleX(0.333);
+    }
+  }
+}
+
+@mixin border-left-1px($color:rgba(7,17,27,0.1)){
+  position: relative;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    height: 100%;
+    border-left: 1px solid $color;
+    @media (min-resolution: 2dppx){
+      transform: scaleX(0.5);
+    }
+    @media (min-resolution: 3dppx){
+      transform: scaleX(0.333);
+    }
+  }
+}
+
+

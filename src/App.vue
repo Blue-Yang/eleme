@@ -1,32 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <v-header :seller="seller"></v-header>
+    <tab></tab>
+    <transition name="move" mode="out-in">
+      <keep-alive>
+        <router-view :seller="seller"></router-view>
+      </keep-alive>
+    </transition>
+    
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import {getSeller} from 'api'
+import Header from './components/header/header.vue'
+import Tab from './components/tab/tab.vue'
+export default {
+  data(){
+    return {
+      seller: {}
     }
+  },
+  created(){
+    getSeller().then(data => {
+      this.seller = data;
+    })
+  },
+  components: {
+    "v-header": Header, // 不准用header
+    Tab
   }
 }
+</script>
+
+<style lang="scss">
+  .move-enter{
+    // transform: translateX(100%);
+    opacity: 0;
+  }
+  .move-leave-to{
+    // transform: translateX(-100%);
+    opacity: 0;
+  }
+  .move-enter-active, .move-leave-active{
+    transition: opacity .2s cubic-bezier(.17,.67,.83,.67);
+  }
 </style>
